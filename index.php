@@ -1,33 +1,3 @@
-<?php
-// index.php - بوت‌کمپ SQL Injection (safe demo)
-// -------------------------------------------------
-// نکته امن: این صفحه صرفاً شبیه‌سازی خروجی را انجام می‌دهد.
-// هیچ کوئری‌ای اجرا نمی‌شود. نمونهٔ PDO امن در پایین به صورت
-// نظر (comment) آمده تا نشان دهی در ارائه.
-session_start();
-$resultMessage = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // گرفتن ورودی
-    $username = isset($_POST['username']) ? (string) $_POST['username'] : '';
-
-    // سرور-ساید validation (whitelist ساده)
-    // اجازه: حروف فارسی، لاتین، اعداد، فاصله، underscore و dash
-    // طول: 1 تا 40 کاراکتر
-    if ($username === '') {
-        $resultMessage = 'لطفاً یک نام کاربری وارد کنید.';
-    } else {
-        // regex برای یونیکد فارسی و حروف/اعداد لاتین
-        $ok = preg_match('/^[\p{Arabic}\w\-\s]{1,40}$/u', $username);
-        if (!$ok) {
-            $resultMessage = 'ورودی نامعتبر — کاراکترهای غیرمجاز یا طول بیش از حد.';
-        } else {
-            // امن‌سازی خروجی برای جلوگیری از XSS
-            $safe = htmlspecialchars($username, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-            $resultMessage = "یافت شد: user = \"{$safe}\" (خروجی شبیه‌سازی شده — امن)";
-        }
-    }
-}
-?>
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
@@ -110,17 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="badge">نمونهٔ امن</div>
           </div>
-
-          <pre class="code" id="codeBlock">
-// PHP (PDO) — نمونهٔ امن (نمایشی)
-&lt;?php
-// $pdo = new PDO('mysql:host=localhost;dbname=test','user','pass');
-// $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :u");
-// $stmt->execute([':u' => $inputUsername]);
-// $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?&gt;
-          </pre>
-
           <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
             <button class="btn" id="copyCode">کپی کد</button>
             <button class="btn" id="showWarning">هشدار ایمنی</button>
