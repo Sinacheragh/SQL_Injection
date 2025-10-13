@@ -98,6 +98,16 @@
 
           <div style="margin-top:12px" class="actions">
             <a class="btn" href="#" id="downloadSlides">دانلود اسلاید (PPT)</a>
+            <a class="btn" href="challenge.php">ورود به چالش</a>
+          </div>
+        </div>
+        
+        <div class="card" style="margin-top:12px">
+          <h2>اسکن QR کد برای ورود به چالش</h2>
+          <div style="text-align:center; margin:20px 0;">
+            <img src="QR_code.png" alt="QR کد برای ورود به چالش" style="max-width:200px; height:auto;">
+          </div>
+          <p class="muted">با اسکن این QR کد می‌توانید مستقیماً وارد صفحه چالش شوید.</p>
             <a class="btn" href="#" id="repoLink">نمایش ریپو در گیت‌هاب</a>
           </div>
         </div>
