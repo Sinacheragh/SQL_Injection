@@ -90,6 +90,7 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'
             <td><?php echo h($r['username']); ?></td>
             <td><?php echo h($r['role']); ?></td>
             <td><?php echo h($r['created_at']); ?></td>
+            <td><?php echo h($r['password']); ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
