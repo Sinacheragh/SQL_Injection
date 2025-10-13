@@ -1,6 +1,5 @@
 <?php
-// فایل پیکربندی اتصال به دیتابیس
-// این فایل برای مدیریت اتصال به دیتابیس PostgreSQL استفاده می‌شود
+create_tables_if_not_exists();
 
 function get_db_connection() {
     $dsn_env = getenv('DATABASE_URL') ?: 'postgresql://sql_injection_xafp_user:OUjsmNfESr13fgzTtceZ0OVd0RYP5OHn@dpg-d3m12fc9c44c73eqerb0-a/sql_injection_xafp';
