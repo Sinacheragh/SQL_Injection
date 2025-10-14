@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>بوت‌کمپ SQL Injection — دانشگاه صنعتی ارومیه</title>
+  <title>بوت‌کمپ SQL Injection ، دانشگاه صنعتی ارومیه</title>
   <style>
     :root{
       --bg:#0b0f13; --card:#0f1720; --muted:#9aa5b1; --accent:#00ff99;
@@ -16,10 +16,10 @@
     .container{max-width:1120px;margin:28px auto;padding:20px}
     header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
     .logo-wrap{display:flex;align-items:center;gap:12px;flex:1}
-    .logo-group{width:64px;height:64px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, rgba(0,255,153,0.08), rgba(0,199,255,0.04));border:1px solid rgba(0,255,153,0.06)}
+    .logo-group{width:80px;height:80px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, rgba(0,255,153,0.08), rgba(0,199,255,0.04));border:1px solid rgba(0,255,153,0.06)}
     .logo-group img{max-width:56px;max-height:56px;display:block;border-radius:8px}
     .logo-uni img{width:40px;height:40px;display:block}
-    h1{font-size:18px;margin:0}
+    h1{font-size:30px;margin:0}
     .lead{margin-top:6px;color:var(--muted);font-size:13px}
 
     .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
@@ -42,6 +42,51 @@
     input[type="text"]{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
     .actions{display:flex;gap:8px;flex-wrap:wrap}
     form{margin:0}
+    /* ===== HEADER: بهتر کردن لوگو و عنوان ===== */
+.logo-group{
+  transition: transform .18s ease, box-shadow .18s ease;
+  will-change: transform;
+}
+.logo-group:hover{
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 14px 40px rgba(0,255,153,0.06);
+}
+
+/* عنوان هنگام hover کمی رنگ می‌گیرد */
+h1{
+  transition: color .18s ease, transform .18s ease;
+}
+h1:hover{
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* کمی فاصله و هماهنگی موبایل */
+@media(max-width:920px){
+  header{padding-bottom:6px}
+  .logo-group{width:56px;height:56px}
+  h1{font-size:24px}
+}
+/* ===== CARD: افکت شناوری ===== */
+.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+/* .card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(142, 217, 214, 0.1);
+  box-shadow: 0 12px 28px rgba(0,255,153,0.05);
+} */
+.card:hover {
+  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.2));
+  backdrop-filter: blur(6px);
+}
+
+}
+.card:hover h3,
+.card:hover p {
+  color: #000; /* مشکی شدن متن */
+}
+
   </style>
 </head>
 <body>
@@ -53,8 +98,8 @@
           <img src="group_logo.png" alt="لوگوی گروه بوت‌کمپ" onerror="this.style.display='none'">
         </div>
         <div>
-          <h1>بوت‌کمپ: بررسی و پیشگیری از SQL Injection</h1>
-          <div class="lead">دانشگاه صنعتی ارومیه — دانشکدهٔ مهندسی کامپیوتر</div>
+          <h1>بوت‌کمپ: انجام و پیشگیری از SQL Injection</h1>
+          <div class="lead">دانشگاه صنعتی ارومیه — دانشکدهٔ فناوری های صنعتی</div>
         </div>
       </div>
       <div style="margin-inline-start:12px;flex-shrink:0;display:flex;align-items:center;">
@@ -69,7 +114,7 @@
       <section>
         <div class="card">
           <h2>معرفی مختصر</h2>
-          <p class="muted">این بوت‌کمپ به روش‌های کشف و پیشگیری از SQL Injection می‌پردازد. تمامی تمرین‌ها ایزوله و امن اجرا می‌شوند.</p>
+          <p class="muted">این بوت‌کمپ به روش‌های انجام و پیشگیری از SQL Injection می‌پردازد. تمامی تمرین‌ها ایزوله و امن اجرا می‌شوند.</p>
         </div>
 
         <div class="card" style="margin-top:12px">
@@ -80,6 +125,17 @@
             </div>
             <div class="badge">نمونهٔ امن</div>
           </div>
+
+          <pre class="code" id="codeBlock">
+// PHP (PDO) — نمونهٔ امن (نمایشی)
+&lt;?php
+// $pdo = new PDO('mysql:host=localhost;dbname=test','user','pass');
+// $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :u");
+// $stmt->execute([':u' => $inputUsername]);
+// $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?&gt;
+          </pre>
+
           <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
             <button class="btn" id="copyCode">کپی کد</button>
             <button class="btn" id="showWarning">هشدار ایمنی</button>
@@ -87,7 +143,7 @@
         </div>
 
         <div class="card" style="margin-top:12px">
-          <h2>روش‌های جلوگیری (خلاصه)</h2>
+          <h2>روش‌های جلوگیری </h2>
           <ul class="muted">
             <li>Prepared Statements / ORM</li>
             <li>اعتبارسنجی و whitelist ورودی‌ها</li>
@@ -98,30 +154,20 @@
 
           <div style="margin-top:12px" class="actions">
             <a class="btn" href="#" id="downloadSlides">دانلود اسلاید (PPT)</a>
-            <a class="btn" href="challenge.php">ورود به چالش</a>
-          </div>
-        </div>
-        
-        <div class="card" style="margin-top:12px">
-          <h2>اسکن QR کد برای ورود به چالش</h2>
-          <div style="text-align:center; margin:20px 0;">
-            <img src="QR_code.png" alt="QR کد برای ورود به چالش" style="max-width:200px; height:auto;">
-          </div>
-          <p class="muted">با اسکن این QR کد می‌توانید مستقیماً وارد صفحه چالش شوید.</p>
             <a class="btn" href="#" id="repoLink">نمایش ریپو در گیت‌هاب</a>
           </div>
         </div>
       </section>
 
       <aside class="card">
-        <h2>پنل مدرس / دموی شبیه‌سازی</h2>
-        <p class="muted">برای امنیت، هیچ‌چیز مستقیم به دیتابیس ارسال نمی‌شود — اینجا فقط خروجی شبیه‌سازی می‌شود.</p>
+        <h2>دموی شبیه‌سازی</h2>
+        <p class="muted">برای امنیت، این صفحه هیچ‌عملی به سرور ارسال نمی‌کند — خروجی به صورت کلاینت-ساید شبیه‌سازی می‌شود.</p>
 
-        <!-- فرم ارسال به سرور (POST) -->
-        <form method="post" novalidate>
+        <!-- فرم ارسال به سرور (کلاینت-ساید شبیه‌سازی) -->
+        <form id="demoForm" novalidate>
           <div style="margin-top:12px">
             <label class="muted">Username (ورودی کاربر):</label>
-            <input id="username" name="username" type="text" placeholder="مثال: ali یا elahe" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8') : ''; ?>"/>
+            <input id="username" name="username" type="text" placeholder="مثال: ali یا elahe" value=""/>
           </div>
 
           <div style="margin-top:10px">
@@ -131,7 +177,7 @@
 
         <div style="margin-top:12px">
           <div class="muted">خروجی:</div>
-          <div class="outbox" id="outbox"><?php echo $resultMessage ?: 'هنوز چیزی اجرا نشده.'; ?></div>
+          <div class="outbox" id="outbox">هنوز چیزی اجرا نشده.</div>
         </div>
 
         <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:12px 0">
@@ -163,14 +209,64 @@
       alert('هشدار: هرگز کدهای آسیب‌پذیر را در محیط عمومی اجرا نکنید. تمرین‌ها را در VM/Docker ایزوله انجام دهید.');
     });
 
-    // وقتی سرور پاسخی داده، می‌خواهیم آن را به صورت قابل scroll نمایش دهیم
+    // -----------------------
+    // Client-side "secure" simulation of server processing
+    // رفتار شبیه‌سازی شده: اعتبارسنجی مشابه نسخهٔ سرور سابق و خروجی امن
+    // -----------------------
     (function(){
-      const out = document.getElementById('outbox');
-      if(out && out.innerText && out.innerText.trim() !== 'هنوز چیزی اجرا نشده.') {
-        // کوچک کردن احتمال XSS: خروجی سرور از htmlspecialchars عبور کرده
-        out.scrollIntoView({behavior:'smooth'});
+      const form = document.getElementById('demoForm');
+      const usernameInput = document.getElementById('username');
+      const outbox = document.getElementById('outbox');
+
+      // regex با Unicode property escapes: اجازه می‌دهد حروف فارسی/عربی، لاتین، اعداد، فاصله، underscore و dash
+      // توجه: مرورگرهای خیلی قدیمی ممکن است از \p{} پشتیبانی نکنند؛ در آن صورت validation ضعیف‌تر عمل خواهد کرد.
+      const validRe = /^[\p{Script=Arabic}\p{Script=Latin}\d_\-\s]{1,40}$/u;
+
+      function escapeForText(s){
+        // امن‌سازی ساده برای جلوگیری از XSS در داخل عنصر متنی
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
       }
+
+      form.addEventListener('submit', function(ev){
+        ev.preventDefault(); // از ارسال واقعی به سرور جلوگیری می‌کنیم
+        const v = (usernameInput.value || '').trim();
+
+        if(v === ''){
+          outbox.innerText = 'لطفاً یک نام کاربری وارد کنید.';
+          return;
+        }
+        // اگر مرورگر از Unicode property escapes پشتیبانی نداشت، validRe.test خواهد شد اما ممکن است خطا بدهد.
+        let ok = false;
+        try { ok = validRe.test(v); } catch(e) { 
+          // fallback ساده: اجازه به حروف/اعداد/فاصله/_/-
+          ok = /^[A-Za-z\u0600-\u06FF0-9_\-\s]{1,40}$/.test(v);
+        }
+
+        if(!ok){
+          outbox.innerText = 'ورودی نامعتبر — کاراکترهای غیرمجاز یا طول بیش از حد.';
+        } else {
+          const safe = escapeForText(v);
+          outbox.innerHTML = `یافت شد: user = &quot;${safe}&quot; (خروجی شبیه‌سازی شده — امن)`;
+        }
+
+        // اسکرول به خروجی (همان رفتار قدیمی)
+        if(outbox && outbox.innerText && outbox.innerText.trim() !== 'هنوز چیزی اجرا نشده.') {
+          outbox.scrollIntoView({behavior:'smooth'});
+        }
+      });
     })();
+
+    // دکمه‌های دانلود/ریپو (نمونه - نیاز به لینک واقعی در پروژه)
+    document.getElementById('downloadSlides').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('لینک اسلاید هنوز تنظیم نشده — در صورت نیاز لینک فایل PPT اضافه کنید.');
+    });
+    document.getElementById('repoLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('لینک ریپوزیتوری هنوز تنظیم نشده — در صورت نیاز URL گیت‌هاب را قرار دهید.');
+    });
   </script>
 </body>
 </html>
