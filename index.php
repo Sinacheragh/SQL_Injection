@@ -38,55 +38,88 @@
 
     footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center}
     @media(max-width:920px){.grid{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start;gap:10px}}
+
     .row{display:flex;gap:8px;align-items:center}
     input[type="text"]{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
     .actions{display:flex;gap:8px;flex-wrap:wrap}
     form{margin:0}
-    /* ===== HEADER: بهتر کردن لوگو و عنوان ===== */
-.logo-group{
-  transition: transform .18s ease, box-shadow .18s ease;
-  will-change: transform;
-}
-.logo-group:hover{
-  transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 14px 40px rgba(0,255,153,0.06);
-}
 
-/* عنوان هنگام hover کمی رنگ می‌گیرد */
-h1{
-  transition: color .18s ease, transform .18s ease;
-}
-h1:hover{
-  color: var(--accent);
-  transform: translateY(-2px);
-}
+    /* ===== HEADER hover ===== */
+    .logo-group{
+      transition: transform .18s ease, box-shadow .18s ease;
+      will-change: transform;
+    }
+    .logo-group:hover{
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 14px 40px rgba(0,255,153,0.06);
+    }
 
-/* کمی فاصله و هماهنگی موبایل */
-@media(max-width:920px){
-  header{padding-bottom:6px}
-  .logo-group{width:56px;height:56px}
-  h1{font-size:24px}
-}
-/* ===== CARD: افکت شناوری ===== */
-.card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-/* .card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(142, 217, 214, 0.1);
-  box-shadow: 0 12px 28px rgba(0,255,153,0.05);
-} */
-.card:hover {
-  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.2));
-  backdrop-filter: blur(6px);
-}
+    h1,h2,h3{
+      transition: color .18s ease, transform .18s ease;
+    }
+    h2:hover,h3:hover,h1:hover{
+          color: var(--accent);
+          transform: translateY(-2px);
 
-}
-.card:hover h3,
-.card:hover p {
-  color: #000; /* مشکی شدن متن */
-}
+    }
 
+    @media(max-width:920px){
+      header{padding-bottom:6px}
+      .logo-group{width:56px;height:56px}
+      h1{font-size:24px}
+    }
+
+    /* ===== CARD hover ===== */
+    .card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(142, 217, 214, 0.1);
+      background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.2)); backdrop-filter: blur(6px);
+
+      box-shadow: 0 12px 28px rgba(0,255,153,0.05);
+    }
+
+    /* ===== سه کارت ستونی ===== */
+    .triple-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .triple-card {
+      background: linear-gradient(180deg, var(--glass), var(--glass-2));
+      border: 1px solid rgba(255,255,255,0.02);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .triple-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(142,217,214,0.1);
+      box-shadow: 0 12px 28px rgba(0,255,153,0.05);
+      background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.2)); backdrop-filter: blur(6px);
+
+
+
+    }
+
+    .triple-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 920px) {
+      .triple-cards { grid-template-columns: 1fr; }
+      .triple-card img { width: 80px; height: 80px; }
+    }
   </style>
 </head>
 <body>
@@ -163,7 +196,6 @@ h1:hover{
         <h2>دموی شبیه‌سازی</h2>
         <p class="muted">برای امنیت، این صفحه هیچ‌عملی به سرور ارسال نمی‌کند — خروجی به صورت کلاینت-ساید شبیه‌سازی می‌شود.</p>
 
-        <!-- فرم ارسال به سرور (کلاینت-ساید شبیه‌سازی) -->
         <form id="demoForm" novalidate>
           <div style="margin-top:12px">
             <label class="muted">Username (ورودی کاربر):</label>
@@ -184,13 +216,32 @@ h1:hover{
 
         <h3 style="margin:6px 0">نکات اجرای امن آزمایشگاه</h3>
         <div class="muted" style="font-size:13px">
-          ۱) همه تمرین‌ها در VM یا Docker اجرا شوند (publicly inaccessible).<br>
-          ۲) از دیتابیس واقعی استفاده نکنید — فقط نمونهٔ تست لوکال.<br>
+          ۱) همه تمرین‌ها در VM یا Docker اجرا شوند.<br>
+          ۲) از دیتابیس واقعی استفاده نکنید.<br>
           ۳) قبل و بعد از هر جلسه snapshot بگیرید.<br>
-          ۴) نمایش payload فقط در اسلاید/متن، اجرای payload در شبکهٔ عمومی ممنوع.
+          ۴) اجرای payload در شبکهٔ عمومی ممنوع.
         </div>
       </aside>
     </main>
+
+    <!-- سه کارت ستونی جدید -->
+    <section class="triple-cards">
+      <div class="triple-card">
+        <img src="qr1.png" alt="QR سوال ۱">
+        <h3>سوال اول بوت‌کمپ</h3>
+        <p class="muted">توضیح مختصر درباره سوال اول. این سوال مفاهیم پایه SQL Injection را بررسی می‌کند.</p>
+      </div>
+      <div class="triple-card">
+        <img src="qr2.png" alt="QR سوال ۲">
+        <h3>سوال دوم بوت‌کمپ</h3>
+        <p class="muted">در این سوال، شرکت‌کننده با روش‌های پیشگیری از حملات آشنا می‌شود.</p>
+      </div>
+      <div class="triple-card">
+        <img src="qr3.png" alt="QR سوال ۳">
+        <h3>سوال سوم بوت‌کمپ</h3>
+        <p class="muted">این سوال شامل ترکیب SQL Injection با تست امنیتی واقعی است.</p>
+      </div>
+    </section>
 
     <footer>
       دانشگاه صنعتی ارومیه — بوت‌کمپ SQL Injection | منابع: OWASP, PHP.net, MDN
@@ -198,7 +249,6 @@ h1:hover{
   </div>
 
   <script>
-    // client-side interactivity (copy, alert)
     document.getElementById('copyCode').addEventListener('click', async () => {
       const code = document.getElementById('codeBlock').innerText;
       try { await navigator.clipboard.writeText(code); alert('کد در کلیپ‌بورد کپی شد.'); }
@@ -206,66 +256,43 @@ h1:hover{
     });
 
     document.getElementById('showWarning').addEventListener('click', () => {
-      alert('هشدار: هرگز کدهای آسیب‌پذیر را در محیط عمومی اجرا نکنید. تمرین‌ها را در VM/Docker ایزوله انجام دهید.');
+      alert('هشدار: هرگز کدهای آسیب‌پذیر را در محیط عمومی اجرا نکنید.');
     });
 
-    // -----------------------
-    // Client-side "secure" simulation of server processing
-    // رفتار شبیه‌سازی شده: اعتبارسنجی مشابه نسخهٔ سرور سابق و خروجی امن
-    // -----------------------
     (function(){
       const form = document.getElementById('demoForm');
       const usernameInput = document.getElementById('username');
       const outbox = document.getElementById('outbox');
-
-      // regex با Unicode property escapes: اجازه می‌دهد حروف فارسی/عربی، لاتین، اعداد، فاصله، underscore و dash
-      // توجه: مرورگرهای خیلی قدیمی ممکن است از \p{} پشتیبانی نکنند؛ در آن صورت validation ضعیف‌تر عمل خواهد کرد.
       const validRe = /^[\p{Script=Arabic}\p{Script=Latin}\d_\-\s]{1,40}$/u;
-
-      function escapeForText(s){
-        // امن‌سازی ساده برای جلوگیری از XSS در داخل عنصر متنی
-        const d = document.createElement('div');
-        d.textContent = s;
-        return d.innerHTML;
-      }
+      function escapeForText(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
       form.addEventListener('submit', function(ev){
-        ev.preventDefault(); // از ارسال واقعی به سرور جلوگیری می‌کنیم
+        ev.preventDefault();
         const v = (usernameInput.value || '').trim();
+        if(v === ''){ outbox.innerText = 'لطفاً یک نام کاربری وارد کنید.'; return; }
 
-        if(v === ''){
-          outbox.innerText = 'لطفاً یک نام کاربری وارد کنید.';
-          return;
-        }
-        // اگر مرورگر از Unicode property escapes پشتیبانی نداشت، validRe.test خواهد شد اما ممکن است خطا بدهد.
         let ok = false;
-        try { ok = validRe.test(v); } catch(e) { 
-          // fallback ساده: اجازه به حروف/اعداد/فاصله/_/-
-          ok = /^[A-Za-z\u0600-\u06FF0-9_\-\s]{1,40}$/.test(v);
-        }
+        try { ok = validRe.test(v); } catch(e) { ok = /^[A-Za-z\u0600-\u06FF0-9_\-\s]{1,40}$/.test(v); }
 
-        if(!ok){
-          outbox.innerText = 'ورودی نامعتبر — کاراکترهای غیرمجاز یا طول بیش از حد.';
-        } else {
+        if(!ok){ outbox.innerText = 'ورودی نامعتبر — کاراکترهای غیرمجاز.'; }
+        else {
           const safe = escapeForText(v);
           outbox.innerHTML = `یافت شد: user = &quot;${safe}&quot; (خروجی شبیه‌سازی شده — امن)`;
         }
 
-        // اسکرول به خروجی (همان رفتار قدیمی)
-        if(outbox && outbox.innerText && outbox.innerText.trim() !== 'هنوز چیزی اجرا نشده.') {
+        if(outbox && outbox.innerText.trim() !== 'هنوز چیزی اجرا نشده.') {
           outbox.scrollIntoView({behavior:'smooth'});
         }
       });
     })();
 
-    // دکمه‌های دانلود/ریپو (نمونه - نیاز به لینک واقعی در پروژه)
     document.getElementById('downloadSlides').addEventListener('click', (e) => {
       e.preventDefault();
-      alert('لینک اسلاید هنوز تنظیم نشده — در صورت نیاز لینک فایل PPT اضافه کنید.');
+      alert('لینک اسلاید هنوز تنظیم نشده.');
     });
     document.getElementById('repoLink').addEventListener('click', (e) => {
       e.preventDefault();
-      alert('لینک ریپوزیتوری هنوز تنظیم نشده — در صورت نیاز URL گیت‌هاب را قرار دهید.');
+      alert('لینک ریپوزیتوری هنوز تنظیم نشده.');
     });
   </script>
 </body>
