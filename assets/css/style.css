@@ -1,0 +1,135 @@
+/* Base */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #e6e6e6;
+    direction: rtl;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Prevent horizontal overflow */
+html, body { overflow-x: hidden; }
+
+/* Global box-sizing */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Ensure pre/code wrap on small screens */
+pre { white-space: pre-wrap; word-break: break-word; }
+
+/* Header/Footer */
+header, footer {
+    box-sizing: border-box;
+}
+
+/* Cards */
+.card {
+    width: 100%;
+}
+ .card { max-width: 100%; }
+
+/* Card layout specifics */
+.card-main-logo img { border-radius: 6px; }
+.card-inner { width: 100%; display: flex; align-items: flex-start; flex-direction: column; }
+.card-media { display: flex; flex-direction: column; align-items: center; }
+.card-media img { max-width: 100%; }
+.card-media .start-btn { max-width: 160px; }
+.card-body { min-width: 0; }
+
+/* On desktop, space between media and body */
+@media (min-width: 769px) {
+    .card-inner { justify-content: space-between; flex-direction: row; }
+    /* ensure media is left and body is right on desktop */
+    .card-media { order: -1; align-items: flex-start; }
+    .card-body { order: 0; }
+}
+
+/* Prevent truncation: allow code and text to flow in desktop */
+.card-body pre { white-space: pre; overflow-x: auto; }
+.card-body p { white-space: normal; }
+
+.glass-hover {
+    transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
+    backdrop-filter: blur(6px) saturate(120%);
+}
+.glass-hover:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.04);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* Heading hover: green and lift */
+.hover-h {
+    display: inline-block;
+    transition: transform 180ms ease, color 180ms ease;
+}
+.hover-h:hover {
+    transform: translateY(-4px);
+    color: #10b981; /* emerald-500 */
+}
+
+/* Shadow for all cards */
+.shadow-card {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Start buttons */
+.start-btn {
+    background: linear-gradient(90deg,#111827,#0b1220);
+    color: #d1fae5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(16,185,129,0.08);
+    background: linear-gradient(90deg,#0f1724,#021019);
+}
+
+/* QR image */
+#qr-script, #qr-other {
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+}
+
+/* Pre/code styling */
+pre { background: transparent; border-radius: 6px; padding: 10px; }
+code { color: #9ae6b4; }
+
+/* GitHub logo styles (requested) */
+#github_logo {
+    border: solid 1px #fff;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+/* Responsive header: stack on small screens */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 12px;
+    }
+    header .flex.items-center.gap-4 > img, header #github_logo {
+        width: 56px;
+        height: 56px;
+    }
+    main { padding: 12px; }
+    .tab-btn { padding: 8px 10px; font-size: 14px; }
+    /* Make tab contents stack and not overflow */
+    #tab-contents { grid-template-columns: 1fr !important; }
+    .card { width: 100%; }
+    /* Ensure media is below text on mobile (card-inner is flex-col-reverse) */
+    .card-inner { flex-direction: column-reverse; }
+    .card-media { width: 100%; display: flex; flex-direction: column; align-items: center;}
+    .card-media .start-btn { max-width: none; width: 80%; }
+}
+
+/* Container width: use full width but keep comfortable max width */
+.container { width: 100%; max-width: 1100px; box-sizing: border-box; }
